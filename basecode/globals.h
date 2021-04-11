@@ -22,5 +22,5 @@ Author: Benjamin C. Watt (feyleafgames.com)
 #include <queue>
 #include <deque>
 #include "ic_math.h"
-
+#include "ic_window.h"
 #endif//GLOBALS_H

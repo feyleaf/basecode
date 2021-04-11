@@ -6,7 +6,9 @@ int main()
 {
 	unsigned int width = 600;
 	sf::RenderWindow window(sf::VideoMode(width, 9*width/16), "SFML works!");
+	sf::CircleShape cursor(4.0f);
 	sf::CircleShape shape(100.f);
+	cursor.setFillColor(sf::Color::Blue);
 	shape.setFillColor(sf::Color::Cyan);
 
 	//sf::Image _image;
@@ -30,6 +32,7 @@ int main()
 		window.clear();
 		window.draw(shape);
 		window.draw(_sprite);
+		window.draw(cursor);
 		window.display();
 
 		while (window.pollEvent(event))
@@ -38,8 +41,20 @@ int main()
 				window.close();
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space)
 				sfxSound.play();
+			if (event.type == sf::Event::MouseMoved)
+			{
+				sf::Mouse _mouse;
+				sf::View view = window.getView();
+				sf::View dview = window.getDefaultView();
+				sf::Vector2i _ipos = _mouse.getPosition(window);
+				sf::IntRect rect = window.getViewport(view);
+				
+				sf::Vector2f _pos = sf::Vector2f(_ipos);
+				cursor.setPosition(_pos);
+			}
 			window.draw(shape);
 			window.draw(_sprite);
+			window.draw(cursor);
 			window.display();
 		}
 	}
